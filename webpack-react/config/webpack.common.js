@@ -15,4 +15,13 @@ module.exports = {
       filename: "index.html",
     })
   ],
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx|ts|tsx)/,
+        // loader: "babel-loader"
+        use: "babel-loader" // 配置项改变，参考官方文档 https://webpack.js.org/concepts/#loaders
+      }
+    ]
+  }
 }
