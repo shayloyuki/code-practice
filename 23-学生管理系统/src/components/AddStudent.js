@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-06 22:29:59
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-08 06:17:51
+ * @LastEditTime: 2024-04-08 07:05:54
  * @FilePath: \23-学生管理系统\src\components\AddStudent.js
  */
 import React, {Component} from 'react'
@@ -19,7 +19,24 @@ class AddStudent extends Component{
         name: '',
         sex: '女',
         age: '',
-        college: 'Java'
+        college: 'Java',
+        hobbies: [
+            {
+                id: 1,
+                title: '足球',
+                isChecked: false
+            },
+            {
+                id: 2,
+                title: '篮球',
+                isChecked: true
+            },
+            {
+                id: 3,
+                title: '橄榄球',
+                isChecked: false
+            },
+        ]
     }
 
     stateHandler = (e) => {
@@ -31,6 +48,16 @@ class AddStudent extends Component{
         }, () => {
             console.log('改变了：',prop);
         })
+    }
+
+    hobbyHandler = (index, e) => {
+        // 当前操作需要提前获取被操作项的索引、事件对象
+        const isChecked = e.target.checked
+        const hobbies = [...this.state.hobbies]
+        hobbies[index].isChecked = isChecked
+        this.setState({
+            hobbies
+        }, ()=> {console.log(this.state.hobbies);})
     }
 
     render() {
@@ -59,26 +86,20 @@ class AddStudent extends Component{
                         <input type="text" name={"age"} alue={this.state.age} onChange={this.stateHandler} className="form-control" placeholder="请输入年龄"/>
                     </div>
                     <div className="form-group">
-                        <label>入学时间</label>
+                        <label>入学时间</label> 
                         <input className="form-control" type="date"/>
                     </div>
                     <div className="form-group">
                         <label>爱好</label>
-                        <div className="checkbox">
-                            <label>
-                                <input type="checkbox" value="足球"/> 足球
-                            </label>
-                        </div>
-                        <div className="checkbox">
-                            <label>
-                                <input type="checkbox" value="篮球"/> 篮球
-                            </label>
-                        </div>
-                        <div className="checkbox">
-                            <label>
-                                <input type="checkbox" value="橄榄球"/> 橄榄球
-                            </label>
-                        </div>
+                        {this.state.hobbies.map((hobby, index) => {
+                            return (
+                                <div className="checkbox" key={hobby.id}>
+                                    <label>
+                                        <input type="checkbox" value={hobby.title} defaultChecked={hobby.isChecked} onChange={(e) => this.hobbyHandler(index, e)}/> {hobby.title}
+                                    </label>
+                                </div>
+                            )
+                        })}
                     </div>
                     <div className="form-group">
                         <label>所属学院</label>
