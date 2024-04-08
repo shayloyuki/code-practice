@@ -1,39 +1,40 @@
 /*
  * @Date: 2024-04-05 13:23:34
- * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-08 08:29:21
+ * @LastEditors: luoxue
+ * @LastEditTime: 2024-04-08 10:49:22
  * @FilePath: \23-学生管理系统\src\App.js
  */
 
-import React, {Component} from 'react'
-import StudentTitle from './components/StudentTitle'
-import AddStudent from './components/AddStudent'
-import StudentList from './components/StudentList'
+import React, { Component } from "react";
+import StudentTitle from "./components/StudentTitle";
+import AddStudent from "./components/AddStudent";
+import StudentList from "./components/StudentList";
 
-class App extends Component{
-
+class App extends Component {
   state = {
-    studentList: []
-  }
+    studentList: [],
+  };
 
   addList = (student, callback) => {
-    this.setState({
-      studentList: [...this.state.studentList, student]
-    }, () => {
-      callback()
-      console.log(this.state);
-    })
-  }
+    this.setState(
+      {
+        studentList: [...this.state.studentList, student],
+      },
+      () => {
+        callback();
+      }
+    );
+  };
 
   render() {
     return (
-      <div className={'container'}>
-        <StudentTitle/>
+      <div className={"container"}>
+        <StudentTitle />
         <AddStudent addList={this.addList} />
-        <StudentList/>
+        <StudentList />
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
