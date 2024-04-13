@@ -1,44 +1,28 @@
-import React, {Component, PureComponent} from 'react'
+import React, {Component} from 'react'
 
-// 解决办法二：使用 PureComponent
-class About extends PureComponent {
-  constructor() {
-    super()
-    this.state = {
-      count: 10
-    }
-  }
-
-  handler = () => {
-    this.setState({
-      count: this.state.count + 5
-    })
-  }
-
+class About extends Component {
   render() {
-    console.log('About 组件执行了 render');
     return (
       <div>
-        <hr />
+        <hr/>
         About组件的内容
-        <span>{this.state.count}</span>
-        <button onClick={this.handler}>点击</button>
       </div>
     )
   }
 
-  // 存在问题：点击 App 中按钮时，About 组件也会更新（About 组件执行了 render），造成性能浪费
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return true
-  // }
+  foo = () => {
+    console.log('About 组件中的 click 操作发生了');
+  }
 
-  // 解决办法一：对比更新状态中的 count 和原 count 是否有改变
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (nextState.count === this.state.count) {
-  //     return false
-  //   }    
-  //   return true
-  // }
+  componentDidMount() {
+    // 当 About 组件挂载完成之后就可以执行 DOM 相关操作，例如此时添加事件监听
+    window.addEventListener('click', this.foo)
+  }
+
+  componentWillUnmount() {
+    // 当前方法会在组件卸载之前执行
+    window.removeEventListener('click', this.foo)
+  }
 }
 
 export default About
