@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-05 13:23:34
- * @LastEditors: luoxue
- * @LastEditTime: 2024-04-08 10:49:22
+ * @LastEditors: shayloyuki shayluo123@outlook.com
+ * @LastEditTime: 2024-04-13 12:12:45
  * @FilePath: \23-学生管理系统\src\App.js
  */
 
@@ -31,7 +31,7 @@ class App extends Component {
       <div className={"container"}>
         <StudentTitle />
         <AddStudent addList={this.addList} />
-        <StudentList />
+        <StudentList studentList={this.state.studentList}/>
       </div>
     );
   }

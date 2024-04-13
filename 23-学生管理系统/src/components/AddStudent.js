@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-06 22:29:59
- * @LastEditors: luoxue
- * @LastEditTime: 2024-04-08 10:50:53
+ * @LastEditors: shayloyuki shayluo123@outlook.com
+ * @LastEditTime: 2024-04-13 12:15:30
  * @FilePath: \23-学生管理系统\src\components\AddStudent.js
  */
 import React, { Component } from "react";
@@ -76,7 +76,7 @@ class AddStudent extends Component {
      */
     const hobbies = this.state.hobbies
       .filter((hobby) => hobby.isChecked)
-      .map((hobby) => hobby.id);
+      .map((hobby) => hobby.title);
     const formValue = {
       ...this.state,
       hobbies,

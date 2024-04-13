@@ -1,13 +1,14 @@
 /*
  * @Date: 2024-04-06 22:29:59
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-06 22:46:46
+ * @LastEditTime: 2024-04-13 12:21:19
  * @FilePath: \23-学生管理系统\src\components\StudentList.js
  */
 import React, { Component } from "react";
 
 class StudentList extends Component {
   render() {
+    const {studentList} = this.props
     return (
       <div className={"col-md-6 col-md-offset-1"}>
         <table className="table table-striped table-hover">
@@ -17,28 +18,32 @@ class StudentList extends Component {
               <th>姓名</th>
               <th>性别</th>
               <th>年龄</th>
-              <th>入学时间</th>
               <th>爱好</th>
               <th>所属学院</th>
               <th>操作</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>01</td>
-              <td>张三</td>
-              <td>男</td>
-              <td>20</td>
-              <td>2020-08-02</td>
-              <td>
-                <span>足球</span>
-              </td>
-              <td>python</td>
-              <td>
-                <a href="www.baidu.com">删除</a>
-                <a href="www.baidu.com">修改</a>
-              </td>
-            </tr>
+            {studentList.map(student => {
+              return (
+                <tr key={student.number}>
+                <td>{student.number}</td>
+                <td>{student.name}</td>
+                <td>{student.sex}</td>
+                <td>{student.age}</td>
+                <td>{student.hobbies.map((hobby, index) => {
+                  return(
+                    <span key={index}>{hobby}</span>
+                  )
+                })}</td>
+                <td>{student.college}</td>
+                <td>
+                  <a href="#">删除</a>
+                  <a href="#">修改</a>
+                </td>
+              </tr>
+              )
+            })}
           </tbody>
         </table>
         <p className="text-center">无学生信息</p>
