@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-06 22:29:59
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-13 12:15:30
+ * @LastEditTime: 2024-04-13 13:00:15
  * @FilePath: \23-学生管理系统\src\components\AddStudent.js
  */
 import React, { Component } from "react";
@@ -82,7 +82,7 @@ class AddStudent extends Component {
       hobbies,
     };
     // 异步和同步：将同步操作放在回调函数中，确保在主函数（异步）执行完毕后再执行回调函数
-    this.props.addList(formValue, () => {
+    this.props.addStudent(formValue, () => {
       this.setState(this.origin);
     });
   };

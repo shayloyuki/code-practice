@@ -1,14 +1,20 @@
 /*
  * @Date: 2024-04-06 22:29:59
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-13 12:21:19
+ * @LastEditTime: 2024-04-13 12:56:26
  * @FilePath: \23-学生管理系统\src\components\StudentList.js
  */
 import React, { Component } from "react";
 
 class StudentList extends Component {
   render() {
-    const {studentList} = this.props
+    const {studentList, removeStudent} = this.props
+    const rmStudent = (number, ev) => {
+      ev.preventDefault()
+      if (window.confirm('是否确定删除该条数据？')) {
+        removeStudent(number)
+      }
+    }
     return (
       <div className={"col-md-6 col-md-offset-1"}>
         <table className="table table-striped table-hover">
@@ -38,8 +44,9 @@ class StudentList extends Component {
                 })}</td>
                 <td>{student.college}</td>
                 <td>
-                  <a href="#">删除</a>
-                  <a href="#">修改</a>
+                  {/* <a href="www.baidu.com" onClick={(ev) => rmStudent(`${student.number}`, ev)}>删除</a> */}
+                  <a href="www.baidu.com" onClick={(ev) => rmStudent(student.number, ev)}>删除</a>
+                  <a href="www.baidu.com">修改</a>
                 </td>
               </tr>
               )
