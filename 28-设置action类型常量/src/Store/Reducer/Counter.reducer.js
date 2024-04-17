@@ -1,24 +1,26 @@
 /*
  * @Date: 2024-04-17 07:54:31
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-17 22:39:08
- * @FilePath: \28-action传递参数\src\Store\Reducer\Counter.reducer.js
+ * @LastEditTime: 2024-04-17 23:30:24
+ * @FilePath: \28-设置action类型常量\src\Store\Reducer\Counter.reducer.js
  */
+import {INCREMENT, INCREMENT_N, DECREMENT} from '../Action_types/Counter.action.types'
+
 const initialState = {
   count: 6
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'increment':
+    case INCREMENT:
       return {
         count: state.count + 1
       }
-    case 'decrement':
+    case DECREMENT:
       return {
         count: state.count - 1
       }
-    case 'increment_n':
+    case INCREMENT_N:
       return {
         count: state.count + action.payload
       }
