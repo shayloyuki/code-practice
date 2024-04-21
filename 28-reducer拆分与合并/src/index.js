@@ -1,17 +1,18 @@
 /*
  * @Date: 2024-04-05 13:23:34
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-17 21:08:36
- * @FilePath: \28-获取store数据\src\index.js
+ * @LastEditTime: 2024-04-22 01:02:25
+ * @FilePath: \28-reducer拆分与合并\src\index.js
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App'
 import {createStore} from 'redux'
-import CounterReducer from './Store/Reducer/Counter.reducer'
+import totalReducer from './Store/Reducer'
 import {Provider} from 'react-redux'
 
-const store = createStore(CounterReducer)
+const store = createStore(totalReducer)
+// console.log(store.getState());
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,8 +1,8 @@
 /*
  * @Date: 2024-04-17 07:59:46
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-17 23:17:24
- * @FilePath: \28-自动生成action触发函数\src\Components\Counter.js
+ * @LastEditTime: 2024-04-22 01:43:20
+ * @FilePath: \28-reducer拆分与合并\src\Components\Counter.js
  */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
@@ -10,7 +10,7 @@ import {bindActionCreators} from 'redux'
 import * as counterActions from '../Store/Actions/Counter.action'
 
 function Counter(props) {
-  console.log(props);
+  // console.log(props, 222);
   return (
     <div>
       <button onClick={props.increment}>+1</button>
@@ -22,7 +22,7 @@ function Counter(props) {
 }
 
 const mapStateToProps = (state) => ({
-  count: state.count
+  count: state.counter.count
 })
 
 // 生成多个指令函数，返回对象
