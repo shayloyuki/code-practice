@@ -1,18 +1,19 @@
 /*
  * @Date: 2024-04-05 13:23:34
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-22 03:09:02
- * @FilePath: \29-redux工作流程梳理\src\App.js
+ * @LastEditTime: 2024-04-22 22:18:11
+ * @FilePath: \29-redux使用代码优化\src\App.js
  */
 /* 
- * 1 创建 store 保存数据，关联 reducer
- * 2 利用 Provider 将 store 向后传递
- * 3 在具体的组件中使用 connect 方法获取 store 里保存的数据，通过组件的 props 访问
- * 4 拿到数据后就可在界面上渲染
+ * 1 合并处理数据所有的 reducer 交给 store 统一管理
+ * 2 让 react 自动创建 action 执行函数
+ * 3 将 action 类型使用的字符串定义为常量后直接使用，有提示
  */
 
 import React, { Component } from "react";
 import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import * as ContentActions from './store/Actions/content.action'
 
 class App extends Component {
 
@@ -22,11 +23,8 @@ class App extends Component {
   }
 
   handler = () => {
-    // 获取 input 输入框内容
     const content = this.myRef.current.value
-    // 调用 dispatch 方法将输入框中的内容传给 action，在 reducer 中处理
-    this.props.dispatch({type: 'addContent', content})
-    // 重置输入框内容
+    this.props.addContent(content)
     this.myRef.current.value = ''
   }
 
@@ -47,7 +45,10 @@ class App extends Component {
 
 // 从 store 中获取当前组件需要使用的数据
 const mapStateToProps = (state) => ({
-  content: state.content
+  content: state.ContentReducer.content
 })
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  ...bindActionCreators(ContentActions, dispatch)
+})
+export default connect(mapStateToProps, mapDispatchToProps)(App);
