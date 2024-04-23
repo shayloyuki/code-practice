@@ -1,8 +1,8 @@
 /*
  * @Date: 2024-04-05 13:23:34
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-23 11:03:00
- * @FilePath: \32-redux-saga异步解决方案\src\index.js
+ * @LastEditTime: 2024-04-23 11:25:02
+ * @FilePath: \32-redux-saga拆分与合并\src\index.js
  */
 
 import React from 'react';
@@ -12,11 +12,13 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import totalReducer from './store/Reducers'
 import createSagaMiddleware from 'redux-saga'
-import personSaga from './store/Saga/person.saga'
+// import personSaga from './store/Saga/person.saga'
+import rootSaga from './store/Saga/root.saga'
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(totalReducer, applyMiddleware(sagaMiddleware))
-sagaMiddleware.run(personSaga)
+// sagaMiddleware.run(personSaga)
+sagaMiddleware.run(rootSaga)
 
 ReactDOM.render(
   <React.StrictMode>
