@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 
-// app.use(cors()); // 使用中间件解决跨域
+app.use(cors()); // 使用中间件解决跨域
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
