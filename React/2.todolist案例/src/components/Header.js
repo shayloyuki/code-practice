@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-25 23:57:41
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 08:30:17
+ * @LastEditTime: 2024-04-26 20:23:31
  * @FilePath: \2.todolist案例\src\components\Header.js
  */
 import React, { Component } from "react";
@@ -27,7 +27,7 @@ class Header extends Component {
     
   }
   render() {
-    console.log(this.props, 'header');
+    // console.log(this.props, 'header');
     return (
       <header className="header">
 				<h1>todos</h1>

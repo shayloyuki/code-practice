@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-26 00:59:09
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 08:18:51
+ * @LastEditTime: 2024-04-26 21:07:28
  * @FilePath: \2.todolist案例\src\store\reducers\todo.reducer.js
  */
 /* 
@@ -9,7 +9,7 @@
  */
 
 import {handleActions as createReducer} from 'redux-actions'
-import {load_todo_success, add_todo_success} from '../actions/todo.action'
+import {load_todo_success, add_todo_success, remove_todo_success} from '../actions/todo.action'
 
 const initialState = {
   todos: []
@@ -21,7 +21,15 @@ const todoReducer = createReducer({
   }),
   [add_todo_success]: (state, action) => ({
     todos: [...state.todos, action.payload]
-  })
+  }),
+  [remove_todo_success]: (state, action) => {
+    // 需要获取被删除项的 id
+    const id = action.payload
+    let todos = JSON.parse(JSON.stringify(state.todos))
+    const index = todos.findIndex(todo => todo.id === id)
+    todos.splice(index, 1)
+    return {todos}
+  }
 }, initialState)
 
 export default todoReducer

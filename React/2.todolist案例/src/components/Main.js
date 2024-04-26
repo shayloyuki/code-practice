@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-25 23:57:54
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 08:03:31
+ * @LastEditTime: 2024-04-26 21:05:23
  * @FilePath: \2.todolist案例\src\components\Main.js
  */
 import React, { Component } from "react";
@@ -16,8 +16,15 @@ class Main extends Component {
 		this.props.load_todo()
 	}
 
+	removeTodo = (id) => {
+		if (window.confirm('确定删除当前任务？')) {
+			// 触发删除操作的指令（异步 + 新指令）
+			this.props.remove_todo(id)
+		}
+	}
+
   render() {
-		// console.log(this.props, 'main');
+		console.log(this.props, 'main');
     return (
 			<section className="main">
 				<input className="toggle-all" type="checkbox"/>
@@ -27,7 +34,7 @@ class Main extends Component {
 							<div className="view">
 								<input className="toggle" type="checkbox" defaultChecked />
 								<label>{item.taskName}</label>
-								<button className="destroy"></button>
+								<button className="destroy" onClick={this.removeTodo.bind(null, item.id)}></button>
 							</div>
 							<input className="edit" defaultValue="Create a TodoMVC template"/>
 						</li>
