@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-25 23:57:54
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 22:11:46
+ * @LastEditTime: 2024-04-26 22:32:41
  * @FilePath: \2.todolist案例\src\components\Main.js
  */
 import React, { Component } from "react";
@@ -24,7 +24,7 @@ class Main extends Component {
 	}
 
   render() {
-		console.log(this.props, 'main');
+		// console.log(this.props, 'main');
     return (
 			<section className="main">
 				<input className="toggle-all" type="checkbox"/>
