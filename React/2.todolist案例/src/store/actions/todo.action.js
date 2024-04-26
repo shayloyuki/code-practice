@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-26 00:57:41
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 01:37:10
+ * @LastEditTime: 2024-04-26 08:29:02
  * @FilePath: \2.todolist案例\src\store\actions\todo.action.js
  */
 
@@ -11,5 +11,10 @@
 */
 import {createAction} from 'redux-actions'
 
+// 1 获取 todos 列表的相关指令
 export const load_todo = createAction('load_todo')
 export const load_todo_success = createAction('load_todo_success')
+
+// 2 新增 todo 列表项的相关指令
+export const add_todo = createAction('add_todo')
+export const add_todo_success = createAction('add_todo_success')
