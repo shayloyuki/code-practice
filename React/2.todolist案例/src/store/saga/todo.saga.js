@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-26 01:05:27
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-27 01:35:04
+ * @LastEditTime: 2024-04-27 02:53:56
  * @FilePath: \2.todolist案例\src\store\saga\todo.saga.js
  */
 /* 
@@ -30,14 +30,14 @@ import axios from "axios";
 
 // 实现 load_todo_data 获取数据同时传递新指令
 function* load_todo_data() {
-  const todoData = yield axios.get('http://localhost:3005/api/todos').then(res => res.data)
+  const todoData = yield axios.get('/api/todos')
   yield put(load_todo_success(todoData))
 }
 
 // 实现 add_todo_data 方法
 function* add_todo_data(action) {
   // 1 完成异步操作
-  const taskInfo = yield axios.post('http://localhost:3005/api/todos', {taskName: action.payload}).then(res => res.data)
+  const taskInfo = yield axios.post('/api/todos', {taskName: action.payload})
   // console.log({taskInfo});
   // 2 重新发送指令
   yield put(add_todo_success(taskInfo.task))
@@ -46,11 +46,11 @@ function* add_todo_data(action) {
 // 实现 remove_todo_data 方法
 function* remove_todo_data(action) {
   // 此时将 id 利用相应接口传递给后端执行具体的删除操作
-  const removeData = yield axios.delete('http://localhost:3005/api/todos', {
+  const removeData = yield axios.delete('/api/todos', {
     params: {
       id: action.payload
     }
-  }).then(res => res.data)
+  })
   // 重新发送指令
   yield put(remove_todo_success(removeData.tasks.id))
 }
@@ -58,28 +58,28 @@ function* remove_todo_data(action) {
 // 实现 modify_todo_data 方法
 function* modify_todo_data(action) {
   const params = action.payload
-  const modifyData = yield axios.put('http://localhost:3005/api/todos/isCompleted', params).then(res => res.data)
+  const modifyData = yield axios.put('/api/todos/isCompleted', params)
   // 重新发送指令
   yield put(modify_todo_success(modifyData.task))
 }
 
 // 实现 clear_todo_data 方法
 function* clear_todo_data() {
-  yield axios.delete('http://localhost:3005/api/todos/clearCompleted').then(res => res.data)
+  yield axios.delete('/api/todos/clearCompleted')
   // 重新发送指令
   yield put(clear_todo_completed_success())
 }
 
 // 实现 modify_todo_edit_data 方法
 function* modify_todo_edit_data(action) {
-  const ret = yield axios.put('http://localhost:3005/api/todos/isEditing', action.payload).then(res => res.data)
+  const ret = yield axios.put('/api/todos/isEditing', action.payload)
   // 重新发送指令
   yield put(modify_todo_edit_success(ret.task))
 }
 
 // 实现 modify_todo_name_data 方法
 function* modify_todo_name_data(action) {
-  const ret = yield axios.put('http://localhost:3005/api/todos', action.payload).then(res => res.data)
+  const ret = yield axios.put('/api/todos', action.payload)
     // 重新发送指令
     yield put(modify_todo_name_success(ret.task))
 }
