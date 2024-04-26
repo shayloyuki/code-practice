@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-25 23:57:54
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-27 00:37:22
+ * @LastEditTime: 2024-04-27 01:29:17
  * @FilePath: \2.todolist案例\src\components\Main.js
  */
 import React, { Component } from "react";
@@ -23,6 +23,14 @@ class Main extends Component {
 		}
 	}
 
+	modifyTodoName = (ev, id) => {
+		// 1 切换状态
+		this.props.modify_todo_edit({id, isEditing: false})
+
+		// 2 修改数据
+		this.props.modify_todo_name({id, taskName: ev.target.value})
+	}
+
   render() {
 		// console.log(this.props, 'main');
     return (
@@ -40,7 +48,7 @@ class Main extends Component {
 								<label onDoubleClick={() => this.props.modify_todo_edit({id: item.id, isEditing: true})}>{item.taskName}</label>
 								<button className="destroy" onClick={this.removeTodo.bind(null, item.id)}></button>
 							</div>
-							<input className="edit" defaultValue={item.taskName} />
+							<input className="edit" defaultValue={item.taskName} onBlur={(ev) => this.modifyTodoName(ev, item.id)} />
 						</li>
 					)})}
 				</ul>

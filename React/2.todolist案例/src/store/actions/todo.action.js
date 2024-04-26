@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-26 00:57:41
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-27 00:25:11
+ * @LastEditTime: 2024-04-27 01:31:40
  * @FilePath: \2.todolist案例\src\store\actions\todo.action.js
  */
 
@@ -34,6 +34,10 @@ export const modify_todo_filter = createAction('modify_todo_filter')
 export const clear_todo_completed = createAction('clear_todo_completed')
 export const clear_todo_completed_success = createAction('clear_todo_completed_success')
 
-// 7 修改任务名称的相关指令
+// 7 任务名称修改指令
 export const modify_todo_edit = createAction('modify_todo_edit')
 export const modify_todo_edit_success = createAction('modify_todo_edit_success')
+
+// 8 任务名称确认指令
+export const modify_todo_name = createAction('modify_todo_name')
+export const modify_todo_name_success = createAction('modify_todo_name_success')

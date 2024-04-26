@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-26 01:05:27
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-27 00:28:06
+ * @LastEditTime: 2024-04-27 01:35:04
  * @FilePath: \2.todolist案例\src\store\saga\todo.saga.js
  */
 /* 
@@ -22,7 +22,9 @@ import {
   clear_todo_completed,
   clear_todo_completed_success,
   modify_todo_edit,
-  modify_todo_edit_success
+  modify_todo_edit_success,
+  modify_todo_name,
+  modify_todo_name_success
 } from '../actions/todo.action'
 import axios from "axios";
 
@@ -75,6 +77,13 @@ function* modify_todo_edit_data(action) {
   yield put(modify_todo_edit_success(ret.task))
 }
 
+// 实现 modify_todo_name_data 方法
+function* modify_todo_name_data(action) {
+  const ret = yield axios.put('http://localhost:3005/api/todos', action.payload).then(res => res.data)
+    // 重新发送指令
+    yield put(modify_todo_name_success(ret.task))
+}
+
 export default function* todoSaga() {
   yield takeEvery(load_todo, load_todo_data)
   yield takeEvery(add_todo, add_todo_data)
@@ -82,4 +91,5 @@ export default function* todoSaga() {
   yield takeEvery(modify_todo, modify_todo_data)
   yield takeEvery(clear_todo_completed, clear_todo_data)
   yield takeEvery(modify_todo_edit, modify_todo_edit_data)
+  yield takeEvery(modify_todo_name, modify_todo_name_data)
 }
