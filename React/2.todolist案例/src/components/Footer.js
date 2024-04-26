@@ -1,13 +1,14 @@
 /*
  * @Date: 2024-04-25 23:58:00
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 23:42:14
+ * @LastEditTime: 2024-04-27 03:41:53
  * @FilePath: \2.todolist案例\src\components\Footer.js
  */
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as todoActions from '../store/actions/todo.action'
+import { getIn } from "immutable";
 
 class Footer extends Component {
 	clearTodo = () => {
@@ -45,8 +46,8 @@ class Footer extends Component {
 
 // 1. 获取 store 当中数据
 const mapStateToProps = (state) => ({
-	todos: state.todoReducer.todos,
-	filter: state.todoReducer.filter
+	// todos: state.todoReducer.todos
+	todos: getIn(state.todoReducer, ['todos'])
 })
 
 // 2. 处理 dispatch 函数
