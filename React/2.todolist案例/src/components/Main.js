@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-25 23:57:54
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 21:05:23
+ * @LastEditTime: 2024-04-26 22:11:46
  * @FilePath: \2.todolist案例\src\components\Main.js
  */
 import React, { Component } from "react";
@@ -30,9 +30,9 @@ class Main extends Component {
 				<input className="toggle-all" type="checkbox"/>
 				<ul className="todo-list">
 					{this.props.todos.map(item => (
-						<li key={item.id}>
+						<li key={item.id} className={item.isCompleted ? "completed" : ''}>
 							<div className="view">
-								<input className="toggle" type="checkbox" defaultChecked />
+								<input className="toggle" type="checkbox" defaultChecked={item.isCompleted} onChange={(e) => {this.props.modify_todo({id: item.id, isCompleted: e.target.checked})}} />
 								<label>{item.taskName}</label>
 								<button className="destroy" onClick={this.removeTodo.bind(null, item.id)}></button>
 							</div>

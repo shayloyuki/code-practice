@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-26 01:05:27
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 21:04:09
+ * @LastEditTime: 2024-04-26 22:01:48
  * @FilePath: \2.todolist案例\src\store\saga\todo.saga.js
  */
 /* 
@@ -10,7 +10,7 @@
 */
 
 import { takeEvery, put } from "redux-saga/effects";
-import {load_todo, load_todo_success, add_todo, add_todo_success, remove_todo, remove_todo_success} from '../actions/todo.action'
+import {load_todo, load_todo_success, add_todo, add_todo_success, remove_todo, remove_todo_success, modify_todo, modify_todo_success} from '../actions/todo.action'
 import axios from "axios";
 
 // 实现 load_todo_data 获取数据同时传递新指令
@@ -40,8 +40,17 @@ function* remove_todo_data(action) {
   yield put(remove_todo_success(removeData.tasks.id))
 }
 
+// 实现 modify_todo_data 方法
+function* modify_todo_data(action) {
+  const params = action.payload
+  const modifyData = yield axios.put('http://localhost:3005/api/todos/isCompleted', params).then(res => res.data)
+  // 重新发送指令
+  yield put(modify_todo_success(modifyData.task))
+}
+
 export default function* todoSaga() {
   yield takeEvery(load_todo, load_todo_data)
   yield takeEvery(add_todo, add_todo_data)
   yield takeEvery(remove_todo, remove_todo_data)
+  yield takeEvery(modify_todo, modify_todo_data)
 }

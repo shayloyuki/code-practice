@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-26 00:57:41
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 20:50:39
+ * @LastEditTime: 2024-04-26 22:17:28
  * @FilePath: \2.todolist案例\src\store\actions\todo.action.js
  */
 
@@ -22,3 +22,7 @@ export const add_todo_success = createAction('add_todo_success')
 // 3 删除 todo 列表项的相关指令
 export const remove_todo = createAction('remove_todo')
 export const remove_todo_success = createAction('remove_todo_success')
+
+// 4 更改 todo 列表项状态相关指令
+export const modify_todo = createAction('modify_todo')
+export const modify_todo_success = createAction('modify_todo_success')
