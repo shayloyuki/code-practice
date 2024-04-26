@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-25 23:58:00
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 23:05:56
+ * @LastEditTime: 2024-04-26 23:42:14
  * @FilePath: \2.todolist案例\src\components\Footer.js
  */
 import React, { Component } from "react";
@@ -10,6 +10,11 @@ import { bindActionCreators } from "redux";
 import * as todoActions from '../store/actions/todo.action'
 
 class Footer extends Component {
+	clearTodo = () => {
+		if (window.confirm('是否确定清除已完成任务？')) {
+			this.props.clear_todo_completed()
+		}
+	}
 
   render() {
 		// console.log(this.props, 'footer');
@@ -31,7 +36,7 @@ class Footer extends Component {
 						<span onClick={() => {this.props.modify_todo_filter('completed')}}>Completed</span>
 					</li>
 				</ul>
-				<button className="clear-completed">Clear completed</button>
+				<button className="clear-completed" onClick={this.clearTodo}>Clear completed</button>
 			</footer>
     );
   }

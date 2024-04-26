@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-26 00:57:41
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 22:50:02
+ * @LastEditTime: 2024-04-26 23:31:01
  * @FilePath: \2.todolist案例\src\store\actions\todo.action.js
  */
 
@@ -29,3 +29,7 @@ export const modify_todo_success = createAction('modify_todo_success')
 
 // 5 更改 todo 列表筛选条件的指令
 export const modify_todo_filter = createAction('modify_todo_filter')
+
+// 6 清除已完成列表项的相关指令
+export const clear_todo_completed = createAction('clear_todo_completed')
+export const clear_todo_completed_success = createAction('clear_todo_completed_success')

@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-26 00:59:09
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 23:06:24
+ * @LastEditTime: 2024-04-26 23:38:52
  * @FilePath: \2.todolist案例\src\store\reducers\todo.reducer.js
  */
 /* 
@@ -9,7 +9,14 @@
  */
 
 import {handleActions as createReducer} from 'redux-actions'
-import {load_todo_success, add_todo_success, remove_todo_success, modify_todo_success, modify_todo_filter} from '../actions/todo.action'
+import {
+  load_todo_success,
+  add_todo_success,
+  remove_todo_success,
+  modify_todo_success,
+  modify_todo_filter,
+  clear_todo_completed_success
+} from '../actions/todo.action'
 
 const initialState = {
   todos: [],
@@ -44,7 +51,15 @@ const todoReducer = createReducer({
   [modify_todo_filter]: (state, action) => ({
     ...state,
     filter: action.payload
-  })
+  }),
+  [clear_todo_completed_success]: (state, action) => {
+    let todos = JSON.parse(JSON.stringify(state.todos))
+    todos = todos.filter(todo => !todo.isCompleted)
+    return {
+      ...state,
+      todos
+    }
+  }
 }, initialState)
 
 export default todoReducer
