@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-25 23:57:54
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 23:04:24
+ * @LastEditTime: 2024-04-27 00:37:22
  * @FilePath: \2.todolist案例\src\components\Main.js
  */
 import React, { Component } from "react";
@@ -29,16 +29,20 @@ class Main extends Component {
 			<section className="main">
 				<input className="toggle-all" type="checkbox"/>
 				<ul className="todo-list">
-					{this.props.todos.map(item => (
-						<li key={item.id} className={item.isCompleted ? "completed" : ''}>
+					{this.props.todos.map(item => {
+						let classes = []
+						if (item.isCompleted) classes.push('completed')
+						if (item.isEditing) classes.push('editing')
+						return (
+						<li key={item.id} className={classes.join(" ")}>
 							<div className="view">
 								<input className="toggle" type="checkbox" defaultChecked={item.isCompleted} onChange={(e) => {this.props.modify_todo({id: item.id, isCompleted: e.target.checked})}} />
-								<label>{item.taskName}</label>
+								<label onDoubleClick={() => this.props.modify_todo_edit({id: item.id, isEditing: true})}>{item.taskName}</label>
 								<button className="destroy" onClick={this.removeTodo.bind(null, item.id)}></button>
 							</div>
-							<input className="edit" defaultValue="Create a TodoMVC template"/>
+							<input className="edit" defaultValue={item.taskName} />
 						</li>
-					))}
+					)})}
 				</ul>
 			</section>
     );

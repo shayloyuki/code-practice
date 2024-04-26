@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-26 00:59:09
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 23:38:52
+ * @LastEditTime: 2024-04-27 00:30:56
  * @FilePath: \2.todolist案例\src\store\reducers\todo.reducer.js
  */
 /* 
@@ -15,7 +15,8 @@ import {
   remove_todo_success,
   modify_todo_success,
   modify_todo_filter,
-  clear_todo_completed_success
+  clear_todo_completed_success,
+  modify_todo_edit_success
 } from '../actions/todo.action'
 
 const initialState = {
@@ -55,6 +56,16 @@ const todoReducer = createReducer({
   [clear_todo_completed_success]: (state, action) => {
     let todos = JSON.parse(JSON.stringify(state.todos))
     todos = todos.filter(todo => !todo.isCompleted)
+    return {
+      ...state,
+      todos
+    }
+  },
+  [modify_todo_edit_success]: (state, action) => {
+    const {id, isEditing} = action.payload
+    let todos = JSON.parse(JSON.stringify(state.todos))
+    const index = todos.findIndex(todo => todo.id === id)
+    todos[index].isEditing = isEditing
     return {
       ...state,
       todos
