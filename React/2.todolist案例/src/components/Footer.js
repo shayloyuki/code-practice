@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-25 23:58:00
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 22:36:36
+ * @LastEditTime: 2024-04-26 23:05:56
  * @FilePath: \2.todolist案例\src\components\Footer.js
  */
 import React, { Component } from "react";
@@ -22,13 +22,13 @@ class Footer extends Component {
 				</span>
 				<ul className="filters">
 					<li>
-						<span>All</span>
+						<span onClick={() => {this.props.modify_todo_filter('all')}}>All</span>
 					</li>
 					<li>
-						<span>Active</span>
+						<span onClick={() => {this.props.modify_todo_filter('active')}}>Active</span>
 					</li>
 					<li>
-						<span>Completed</span>
+						<span onClick={() => {this.props.modify_todo_filter('completed')}}>Completed</span>
 					</li>
 				</ul>
 				<button className="clear-completed">Clear completed</button>
@@ -40,7 +40,8 @@ class Footer extends Component {
 
 // 1. 获取 store 当中数据
 const mapStateToProps = (state) => ({
-	todos: state.todoReducer.todos
+	todos: state.todoReducer.todos,
+	filter: state.todoReducer.filter
 })
 
 // 2. 处理 dispatch 函数

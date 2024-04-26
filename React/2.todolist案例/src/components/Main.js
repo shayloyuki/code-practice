@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-25 23:57:54
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 22:32:41
+ * @LastEditTime: 2024-04-26 23:04:24
  * @FilePath: \2.todolist案例\src\components\Main.js
  */
 import React, { Component } from "react";
@@ -48,12 +48,24 @@ class Main extends Component {
 
 // 1. 获取 store 当中数据
 const mapStateToProps = (state) => ({
-	todos: state.todoReducer.todos
+	todos: filterTodos(state.todoReducer.todos, state.todoReducer.filter)
 })
 
 // 2. 处理 dispatch 函数
 const mapDispatchToProps = (dispatch) => ({
 	...bindActionCreators(todoActions, dispatch)
 })
+
+// 3. 定义方法依据 filter 筛选出需要展示的数据
+const filterTodos = (todos, filter) => {
+	switch (filter) {
+		case 'active':
+			return todos.filter(todo => !todo.isCompleted);
+		case 'completed':
+			return todos.filter(todo => todo.isCompleted);
+		default:
+			return todos;
+	}
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main)

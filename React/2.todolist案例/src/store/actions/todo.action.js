@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-26 00:57:41
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-04-26 22:17:28
+ * @LastEditTime: 2024-04-26 22:50:02
  * @FilePath: \2.todolist案例\src\store\actions\todo.action.js
  */
 
@@ -26,3 +26,6 @@ export const remove_todo_success = createAction('remove_todo_success')
 // 4 更改 todo 列表项状态相关指令
 export const modify_todo = createAction('modify_todo')
 export const modify_todo_success = createAction('modify_todo_success')
+
+// 5 更改 todo 列表筛选条件的指令
+export const modify_todo_filter = createAction('modify_todo_filter')
