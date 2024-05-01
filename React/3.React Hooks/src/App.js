@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-25 23:52:08
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-05-01 16:55:41
+ * @LastEditTime: 2024-05-01 23:18:13
  * @FilePath: \3.React Hooks\src\App.js
  */
 /* 
@@ -29,7 +29,8 @@ class App extends Component {
           <Switch>
             <Route path="/" component={Home} exact/> 
             <Route path="/home" component={Home}/>
-            <Route path="/list" component={List} exact/>
+            {/* <Route path="/list" component={List} exact/> */}
+            <Route path="/list" component={List}/>
             <Route path="/detail/:id" component={Detail}/>
             <Route component={NotFound}/>
           </Switch>
