@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-25 23:52:08
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-05-01 15:44:15
+ * @LastEditTime: 2024-05-01 16:02:58
  * @FilePath: \3.React Hooks\src\App.js
  */
 /* 
@@ -27,6 +27,8 @@ class App extends Component {
           <Link to="/list">列表页</Link>
         </div>
         <div>
+          {/* exact 属性精确匹配 */}
+          <Route path="/" component={Home} exact/> 
           <Route path="/home" component={Home}/>
           <Route path="/list" component={List}/>
         </div>
