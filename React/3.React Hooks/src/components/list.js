@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-05-01 15:28:32
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-05-01 16:53:20
+ * @LastEditTime: 2024-05-01 22:30:19
  * @FilePath: \3.React Hooks\src\components\list.js
  */
 import React, {Component} from "react";
@@ -13,6 +13,7 @@ class List extends Component {
       <div>
         <p><Link to="/detail/1">列表文章1</Link></p>
         <p><Link to="/detail/2">列表文章2</Link></p>
+        <p><Link to="/home?title=来自于list">返回首页</Link></p>
       </div>
     )
   }
