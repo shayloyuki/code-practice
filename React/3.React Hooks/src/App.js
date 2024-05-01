@@ -1,20 +1,16 @@
 /*
  * @Date: 2024-04-25 23:52:08
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-05-01 23:18:13
+ * @LastEditTime: 2024-05-02 00:31:57
  * @FilePath: \3.React Hooks\src\App.js
  */
-/* 
- * 01 路由参数占位符
- * 02 触发操作的时候传递具体的参数
- * 03 在具体的组件中使用传递的参数
-*/
 import React, { Component } from "react";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch, Redirect } from "react-router-dom";
 import Home from './components/home'
 import List from './components/list'
 import NotFound from './components/notFound'
 import Detail from './components/detail'
+import auth from './auth'
 
 class App extends Component {
 
@@ -29,8 +25,19 @@ class App extends Component {
           <Switch>
             <Route path="/" component={Home} exact/> 
             <Route path="/home" component={Home}/>
-            {/* <Route path="/list" component={List} exact/> */}
-            <Route path="/list" component={List}/>
+            {/* 守卫 list 路由 */}
+            {/* <Route path="/list" component={List}/> */}
+            <Route path="/list" render={(props) => {
+              if (auth.isAuthorized()) {
+                // 进入路由
+                console.log('进入list路由');
+                return <List {...props}/>
+              } else {
+                // 重定向
+                console.log('重定向到home');
+                return <Redirect to="/home"/>
+              }
+            }}/>
             <Route path="/detail/:id" component={Detail}/>
             <Route component={NotFound}/>
           </Switch>
