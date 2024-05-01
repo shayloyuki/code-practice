@@ -1,21 +1,14 @@
 /*
  * @Date: 2024-04-25 23:52:08
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-05-01 16:02:58
+ * @LastEditTime: 2024-05-01 16:14:25
  * @FilePath: \3.React Hooks\src\App.js
  */
-/* 
- * react-router-dom@5.3.4
- * 
- * HashRouter: 开启路由
- * Link: to 属性指定跳转的链接
- * Route：path component
-*/
-
 import React, { Component } from "react";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 import Home from './components/home'
 import List from './components/list'
+import NotFound from './components/notFound'
 
 class App extends Component {
 
@@ -27,10 +20,13 @@ class App extends Component {
           <Link to="/list">列表页</Link>
         </div>
         <div>
-          {/* exact 属性精确匹配 */}
-          <Route path="/" component={Home} exact/> 
-          <Route path="/home" component={Home}/>
-          <Route path="/list" component={List}/>
+          <Switch>
+            <Route path="/" component={Home} exact/> 
+            <Route path="/home" component={Home}/>
+            <Route path="/list" component={List} exact/>
+            {/* <Route path="/list" component={List}/> */}
+            <Route component={NotFound}/>
+          </Switch>
         </div>
       </div>
     );
