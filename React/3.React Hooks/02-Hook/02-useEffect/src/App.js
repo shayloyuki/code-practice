@@ -1,62 +1,44 @@
+/*
+ * @Date: 2024-04-25 23:52:08
+ * @LastEditors: shayloyuki shayluo123@outlook.com
+ * @LastEditTime: 2024-05-02 19:29:25
+ * @FilePath: \02-useEffect\src\App.js
+ */
 /* 
- * 01 在函数组件中可以多次使用同一个 Hook 函数
- * 02 简单类型、复杂类型
- * 03 set 操作也是异步的，不能直接修改 state 的原始值
+ * useEffect
+ *  1 挂载、更新、卸载
+ *  2 第一个参数：函数，并且里面还要 return 一个函数
+ *  3 第二个参数：数组，内容是能够触发 useEffect 函数的 state
 */
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
-function App() {
-  const [ageState, setAgeState] = useState(10)
-  const [nameState, setNameState] = useState('lx')
-  const [personState, setPersonState] = useState({name: 'Kate', age: 30})
-  const [listState, setListState] = useState([
-    {name: 'LiHua', age: 18},
-    {name: 'ZhangNa', age: 26},
-    {name: 'ZhuMing', age: 15},
-  ])
+function Header() {
+  const [strState, setStrState] = useState('lx')
+  const [numState, setNumState] = useState(10)
 
-  // 修改第一个年龄
-  function incrementAge() {
-    // 只执行一次，因为是异步的，只有最后一个会生效，结果：20
-    // setAgeState(ageState + 10)
-    // setAgeState(ageState + 10)
-    // setAgeState(ageState + 10)
-  
-    // 回调函数：都会执行。结果：40
-    setAgeState((pre) => pre + 10)
-    setAgeState((pre) => pre + 10)
-    setAgeState((pre) => pre + 10)
-  }
-
-  // 修改第三个对象的姓名
-  function nameChange() {
-    // 直接修改不会生效
-    // personState.name = 'Lily'
-
-    // 覆盖操作
-    setPersonState({...personState, name: 'Lily'})
-  }
+  useEffect(() => {
+    console.log('挂载与更新完成了');
+    return () => {
+      console.log('卸载完成了');
+    }
+  }, [strState])
 
   return (
     <div>
-      年龄：{ageState}
-      <button onClick={() => incrementAge()}>+10</button>
-      <button onClick={() => setAgeState(ageState - 10)}>-10</button>
+      <p>{strState} <button onClick={() => setStrState('Alice')}>修改字符</button></p>
+      <p>{numState} <button onClick={() => setNumState(numState + 1)}>修改数值</button></p>
+    </div>
+  )
+}
+
+function App() {
+  const [isShow, setIsShow] = useState(true)
+
+  return (
+    <div>
+      {isShow && <Header/>}
       <hr/>
-      姓名：{nameState}
-      <button onClick={() => setNameState('Alice')}>修改姓名</button>
-      <hr/>
-      对象：{personState.name}--{personState.age}
-      <button onClick={() => nameChange()}>修改对象姓名</button>
-      <hr/>
-      数组：
-      {
-        listState.map((item, index) => {
-          return (
-            <p key={index}>{item.name}--{item.age}</p>
-          )
-        })
-      }
+      <button onClick={() => setIsShow(!isShow)}>切换</button>
     </div>
   )
 }
