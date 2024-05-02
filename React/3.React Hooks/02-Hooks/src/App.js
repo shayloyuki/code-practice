@@ -1,39 +1,62 @@
-/*
- * @Date: 2024-04-25 23:52:08
- * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-05-02 18:18:49
- * @FilePath: \02-Hooks\src\App.js
- */
 /* 
- * 1 什么是 Hook
- *   它就是一个特殊的函数，可以让函数式也具有类组件的特性
- *
- * 2 为什么需要 Hook
- *   01 学习成本（相对）
- *   02 数据共享
- *   03 多个业务逻辑代码有可能会存在于同一个生命周期函数中
- * 
- * 3 useState
- *   它是一个可以在函数式组件中保存状态的 Hook 函数
- *   参数：保存状态的初始值
- *   返回值：一个数组
- *     01 第一个元素：当前保存的状态
- *     02 第二个元素：修改当前保存状态的方法
+ * 01 在函数组件中可以多次使用同一个 Hook 函数
+ * 02 简单类型、复杂类型
+ * 03 set 操作也是异步的，不能直接修改 state 的原始值
 */
-
 import React, {useState} from "react";
 
 function App() {
-  const arr = useState(0)
-  console.log(arr);
-  const [state, setState] = arr
-  console.log(state, setState);
+  const [ageState, setAgeState] = useState(10)
+  const [nameState, setNameState] = useState('lx')
+  const [personState, setPersonState] = useState({name: 'Kate', age: 30})
+  const [listState, setListState] = useState([
+    {name: 'LiHua', age: 18},
+    {name: 'ZhangNa', age: 26},
+    {name: 'ZhuMing', age: 15},
+  ])
+
+  // 修改第一个年龄
+  function incrementAge() {
+    // 只执行一次，因为是异步的，只有最后一个会生效，结果：20
+    // setAgeState(ageState + 10)
+    // setAgeState(ageState + 10)
+    // setAgeState(ageState + 10)
+  
+    // 回调函数：都会执行。结果：40
+    setAgeState((pre) => pre + 10)
+    setAgeState((pre) => pre + 10)
+    setAgeState((pre) => pre + 10)
+  }
+
+  // 修改第三个对象的姓名
+  function nameChange() {
+    // 直接修改不会生效
+    // personState.name = 'Lily'
+
+    // 覆盖操作
+    setPersonState({...personState, name: 'Lily'})
+  }
 
   return (
     <div>
-      数据：{state}
-      <button onClick={() => setState(state + 1)}>+1</button>
-      <button onClick={() => setState(state - 1)}>-1</button>
+      年龄：{ageState}
+      <button onClick={() => incrementAge()}>+10</button>
+      <button onClick={() => setAgeState(ageState - 10)}>-10</button>
+      <hr/>
+      姓名：{nameState}
+      <button onClick={() => setNameState('Alice')}>修改姓名</button>
+      <hr/>
+      对象：{personState.name}--{personState.age}
+      <button onClick={() => nameChange()}>修改对象姓名</button>
+      <hr/>
+      数组：
+      {
+        listState.map((item, index) => {
+          return (
+            <p key={index}>{item.name}--{item.age}</p>
+          )
+        })
+      }
     </div>
   )
 }
