@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-25 23:52:08
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-05-02 19:29:25
+ * @LastEditTime: 2024-05-02 19:36:00
  * @FilePath: \02-useEffect\src\App.js
  */
 /* 
@@ -15,6 +15,21 @@ import React, {useState, useEffect} from "react";
 function Header() {
   const [strState, setStrState] = useState('lx')
   const [numState, setNumState] = useState(10)
+
+  useEffect(() => {
+    console.log('事件监听添加操作');
+    return () => {
+      console.log('移除事件监听');
+    }
+  })
+
+  useEffect(() => {
+    console.log('发送网络请求获取数据');
+  })
+
+  useEffect(() => {
+    console.log('判断是否登录');
+  })
 
   useEffect(() => {
     console.log('挂载与更新完成了');
