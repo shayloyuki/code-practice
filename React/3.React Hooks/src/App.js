@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-04-25 23:52:08
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-05-02 00:31:57
+ * @LastEditTime: 2024-05-02 15:11:39
  * @FilePath: \3.React Hooks\src\App.js
  */
 import React, { Component } from "react";
@@ -11,6 +11,7 @@ import List from './components/list'
 import NotFound from './components/notFound'
 import Detail from './components/detail'
 import auth from './auth'
+import AuthRouteGuard from "./guard";
 
 class App extends Component {
 
@@ -27,7 +28,7 @@ class App extends Component {
             <Route path="/home" component={Home}/>
             {/* 守卫 list 路由 */}
             {/* <Route path="/list" component={List}/> */}
-            <Route path="/list" render={(props) => {
+            {/* <Route path="/list" render={(props) => {
               if (auth.isAuthorized()) {
                 // 进入路由
                 console.log('进入list路由');
@@ -35,9 +36,10 @@ class App extends Component {
               } else {
                 // 重定向
                 console.log('重定向到home');
-                return <Redirect to="/home"/>
+                return <Redirect to="/home."/>
               }
-            }}/>
+            }}/> */}
+            <AuthRouteGuard path="/list" component={List}/>
             <Route path="/detail/:id" component={Detail}/>
             <Route component={NotFound}/>
           </Switch>
