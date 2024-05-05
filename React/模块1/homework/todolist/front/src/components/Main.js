@@ -1,7 +1,14 @@
+/*
+ * @Date: 2024-05-05 08:45:14
+ * @LastEditors: shayloyuki shayluo123@outlook.com
+ * @LastEditTime: 2024-05-05 20:44:09
+ * @FilePath: \todolist\front\src\components\Main.js
+ */
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as todoActions from '../store/actions/todo.action'
+import { getIn } from "immutable";
 
 class Main extends Component {
 	componentDidMount() {
@@ -29,7 +36,6 @@ class Main extends Component {
 	}
 
   render() {
-		// console.log(this.props, 'Main');
     return (
 			<section className="main">
 				<input className="toggle-all" type="checkbox" />
@@ -75,12 +81,9 @@ const filterTodos = (todos, filter) => {
 	}
 }
 
-const mapStateToProps = (state) => {
-	let {todos, filter} = state.todoReducer
-	return {
-		todos: filterTodos(todos, filter)
-	}
-}
+const mapStateToProps = (state) => ({
+	todos: filterTodos(getIn(state.todoReducer, ['todos']), getIn(state.todoReducer, ['filter']))
+})
 
 const mapDispatchToProps = (dispatch) => ({
 	...bindActionCreators(todoActions, dispatch)

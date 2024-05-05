@@ -1,13 +1,14 @@
 /*
  * @Date: 2024-05-05 08:45:28
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-05-05 16:53:11
- * @FilePath: \todolist\src\components\Footer.js
+ * @LastEditTime: 2024-05-05 20:49:28
+ * @FilePath: \todolist\front\src\components\Footer.js
  */
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as todoActions from '../store/actions/todo.action'
+import { getIn } from "immutable";
 
 class Footer extends Component {
 
@@ -19,7 +20,6 @@ class Footer extends Component {
 	
   render() {
 		const remainTask = this.props.todos.filter(todo => !todo.isCompleted)
-		// console.log(this.props, 'Footer');
     return (
 			<footer className="footer">
 				<span className="todo-count">
@@ -43,7 +43,7 @@ class Footer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	todos: state.todoReducer.todos
+	todos: getIn(state.todoReducer, ['todos'])
 })
 
 const mapDispatchToProps = (dispatch) => ({

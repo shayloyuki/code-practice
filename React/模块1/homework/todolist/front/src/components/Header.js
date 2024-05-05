@@ -1,13 +1,14 @@
 /*
  * @Date: 2024-05-05 08:45:08
  * @LastEditors: shayloyuki shayluo123@outlook.com
- * @LastEditTime: 2024-05-05 14:16:26
- * @FilePath: \todolist\src\components\Header.js
+ * @LastEditTime: 2024-05-05 20:17:33
+ * @FilePath: \todolist\front\src\components\Header.js
  */
 import React, {Component} from "react";
 import {connect} from 'react-redux'
 import { bindActionCreators } from "redux";
 import * as todoActions from '../store/actions/todo.action'
+import { getIn } from "immutable";
 
 class Header extends Component {
   addTodo = (ev) => {
@@ -24,7 +25,6 @@ class Header extends Component {
   }
 
   render() {
-    // console.log(this.props, 'Header');
     return (
 			<header className="header">
 				<h1>todos</h1>
@@ -35,7 +35,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  todos: state.todoReducer.todos
+  todos: getIn(state.todoReducer, ['todos'])
 })
 
 const mapDispatchToProps = (dispatch) => ({
